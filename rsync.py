@@ -4,13 +4,8 @@
 import os
 import sys
 import time
-
-
-
-
-
 import os.path
-
+import subprocess
 
 def get_cmd_file(rootdir):
     fnlist = []
@@ -20,16 +15,16 @@ def get_cmd_file(rootdir):
             fnlist.append(the_file)
     return fnlist
 
-def run_cmd(rootdir,sleep_sec):
-    while True:
-        for fn in get_cmd_file(rootdir):
-            command = "/bin/sh %s"%fn
-            print command
-            os.system(command)
-        time.sleep(sleep_sec)
+def run_cmd(rootdir):
+    for fn in get_cmd_file(rootdir):
+        command = "/bin/sh %s"%fn
+        print "===>",command
+        subprocess.call(["/bin/sh",fn])
 
 
 if __name__ == "__main__":
     rootdir = "/scripts"
-    sleep_sec = int(sys.argv[1])
-    run_cmd(rootdir,sleep_sec)
+    st = int(sys.argv[1])
+    print "sleep sec %d"%st
+    run_cmd(rootdir)
+    time.sleep(st)
