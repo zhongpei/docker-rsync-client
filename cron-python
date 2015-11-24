@@ -1,0 +1,4 @@
+# /etc/cron.d
+
+#
+* * * * * root python /data/run.py >> /var/log/test.log
