@@ -17,7 +17,7 @@ def get_cmd_file(rootdir):
 
 def run_cmd(rootdir):
     for fn in get_cmd_file(rootdir):
-        command = "/bin/sh %s"%fn
+        command = "/bin/sh %s "%fn
         print "===>",command
         subprocess.call(["/bin/sh",fn])
 
@@ -25,6 +25,11 @@ def run_cmd(rootdir):
 if __name__ == "__main__":
     rootdir = "/scripts"
     st = int(sys.argv[1])
-    print "sleep sec %d"%st
+    if os.getenv('RUN_INTERVAL'):
+        try:
+            s = int(os.getenv('RUN_INTERVAL'))
+        except:
+            pass
+    print "run interval sec %d"%st
     run_cmd(rootdir)
     time.sleep(st)

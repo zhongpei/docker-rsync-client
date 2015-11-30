@@ -10,12 +10,11 @@ RUN apt-get update && apt-get install -y software-properties-common python-softw
 	&& apt-get install -y supervisor\
 	&& apt-get purge -y python-software-properties software-properties-common && apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Set the time zone to the local time zone
-RUN echo "Asia/Shanghai" > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
-COPY ./rsync.py /rsync.py
-RUN chmod +x /rsync.py
 WORKDIR /data
-RUN service supervisor stop
+COPY ./run_scripts.py /run_scripts.py
+RUN echo "Asia/Shanghai" > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata\
+	&& chmod +x /run_scripts.py\
+	&& service supervisor stop
 ADD ./supervisord.conf /etc/supervisord.conf
 CMD supervisord -c /etc/supervisord.conf -n
 
