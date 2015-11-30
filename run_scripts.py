@@ -25,9 +25,9 @@ def run_cmd(rootdir):
 if __name__ == "__main__":
     rootdir = "/scripts"
     st = int(sys.argv[1])
-    if os.getenv('RUN_INTERVAL'):
+    if os.getenv('RSYNC_RUN_INTERVAL'):
         try:
-            s = int(os.getenv('RUN_INTERVAL'))
+            s = int(os.getenv('RSYNC_RUN_INTERVAL'))
         except:
             pass
     print "run interval sec %d"%st
