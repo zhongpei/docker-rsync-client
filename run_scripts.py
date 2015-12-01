@@ -27,7 +27,7 @@ if __name__ == "__main__":
     st = int(sys.argv[1])
     if os.getenv('RSYNC_RUN_INTERVAL'):
         try:
-            s = int(os.getenv('RSYNC_RUN_INTERVAL'))
+            st = int(os.getenv('RSYNC_RUN_INTERVAL'))
         except:
             pass
     print "run interval sec %d"%st
